@@ -1,0 +1,5 @@
+Display:
+
+The easiest way to print text to the screen at this stage is the VGA text buffer. It is a special memory area mapped to the VGA hardware that contains the contents displayed on screen. It normally consists of 25 lines that each contain 80 character cells. Each character cell displays an ASCII character with some foreground and background colors.
+
+The buffer is located at address 0xb8000 and that each character cell consists of an ASCII byte and a color byte.
