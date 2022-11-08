@@ -1,4 +1,5 @@
 use crate::{print, println};
+use crate::qemu::*;
 
 #[cfg(test)]
 pub fn test_runner(tests: &[&dyn Fn()]) {
@@ -6,6 +7,8 @@ pub fn test_runner(tests: &[&dyn Fn()]) {
     for test in tests {
         test();
     }
+
+    exit_qemu(QemuExitCode::Success);
 }
 
 #[test_case]

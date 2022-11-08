@@ -8,6 +8,8 @@ use core::panic::PanicInfo;
 
 mod vga_buffer;
 mod custom_test;
+mod serial;
+mod qemu;
 
 /// This function is called on panic.
 #[panic_handler]
