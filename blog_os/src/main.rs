@@ -5,16 +5,28 @@
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
+use crate::qemu::{exit_qemu, QemuExitCode};
 
 mod vga_buffer;
 mod custom_test;
 mod serial;
 mod qemu;
 
-/// This function is called on panic.
+// our existing panic handler
+#[cfg(not(test))]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
+    loop {}
+}
+
+// our panic handler in test mode
+#[cfg(test)]
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    serial_println!("[failed]\n");
+    serial_println!("Error: {}\n", info);
+    exit_qemu(QemuExitCode::Failed);
     loop {}
 }
 

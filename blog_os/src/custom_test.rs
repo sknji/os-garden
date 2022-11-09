@@ -1,19 +1,28 @@
-use crate::{print, println};
+use crate::{print, println, serial_print, serial_println};
 use crate::qemu::*;
 
-#[cfg(test)]
-pub fn test_runner(tests: &[&dyn Fn()]) {
-    println!("Running {} tests", tests.len());
-    for test in tests {
-        test();
-    }
+pub trait Testable {
+    fn run(&self) -> ();
+}
 
+impl<T> Testable for T where T: Fn(), {
+    fn run(&self) {
+        serial_print!("{}...\t", core::any::type_name::<T>());
+        self();
+        serial_println!("[ok]");
+    }
+}
+
+#[cfg(test)]
+pub fn test_runner(tests: &[&dyn Testable]) {
+    serial_println!("Running {} tests", tests.len());
+    for test in tests {
+        test.run();
+    }
     exit_qemu(QemuExitCode::Success);
 }
 
 #[test_case]
 fn trivial_assertion() {
-    print!("trivial assertion... ");
     assert_eq!(1, 1);
-    println!("[ok]");
 }
