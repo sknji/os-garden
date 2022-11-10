@@ -1,7 +1,7 @@
+use core::panic::PanicInfo;
+
 use crate::{print, println, serial_print, serial_println};
 use crate::qemu::*;
-
-use core::panic::PanicInfo;
 
 pub trait Testable {
     fn run(&self) -> ();

@@ -12,6 +12,8 @@ pub mod vga_buffer;
 pub mod serial;
 pub mod qemu;
 pub mod custom_test;
+pub mod interrupts;
+pub mod keyboard;
 
 /// Entry point for `cargo test`
 #[cfg(test)]
