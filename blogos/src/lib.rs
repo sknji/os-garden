@@ -1,6 +1,7 @@
 #![no_std] // don't link the Rust standard library
 #![cfg_attr(test, no_main)]
 #![feature(custom_test_frameworks)]
+#![feature(abi_x86_interrupt)]
 #![test_runner(crate::custom_test::test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
@@ -15,10 +16,15 @@ pub mod custom_test;
 pub mod interrupts;
 pub mod keyboard;
 
+pub fn init() {
+    interrupts::init_idt();
+}
+
 /// Entry point for `cargo test`
 #[cfg(test)]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    init();
     test_main();
     loop {}
 }
