@@ -15,6 +15,7 @@ pub mod qemu;
 pub mod custom_test;
 pub mod interrupts;
 pub mod keyboard;
+pub mod gdt;
 
 pub fn init() {
     interrupts::init_idt();
