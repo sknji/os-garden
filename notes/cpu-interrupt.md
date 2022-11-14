@@ -53,3 +53,26 @@ On x86_64, the TSS no longer holds any task-specific information at all. Instead
 | (reserved)	| u64 |
 | (reserved)	| u16 |
 | I/O Map Base Address 	| u16 |
+
+
+#### Loading the TSS
+TSS uses the segmentation system (for historical reasons). Instead of loading the table directly, we need to add a new segment descriptor to the Global Descriptor Table (GDT). Then we can load our TSS by invoking the ltr instruction with the respective GDT index.
+
+
+#### The Global Descriptor Table (GDT)
+The GDT is a structure that contains the segments of the program. It was used on older architectures to isolate programs from each other before paging became the standard.
+
+While segmentation is no longer supported in 64-bit mode, the GDT still exists. It is mostly used for two things: Switching between kernel space and user space, and loading a TSS structure.
+
+#### Timer interrupts
+Timer interrupts are essential for an operating system because they provide a way to periodically interrupt the running process and let the kernel regain control. The kernel can then switch to a different process and create the illusion of multiple processes running in parallel.
+
+##### End of Interrupt
+The reason is that the PIC expects an explicit “end of interrupt” (EOI) signal from our interrupt handler. This signal tells the controller that the interrupt was processed and that the system is ready to receive the next interrupt. So the PIC thinks we’re still busy processing the first timer interrupt and waits patiently for the EOI signal before sending the next one.
+
+#### Programmable Interrupt Controller
+Programmable Interrupt controller aggregates the interrupts from all devices and then notifies the CPU
+
+![PIC communication with the CPU](images/pic-communication.png)
+
+E.g when you press a key, the keyboard controller sends an interrupt to the PIC, which forwards it to the CPU. The CPU looks for a handler function in the IDT.

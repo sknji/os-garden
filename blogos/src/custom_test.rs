@@ -1,6 +1,6 @@
 use core::panic::PanicInfo;
 
-use crate::{print, println, serial_print, serial_println};
+use crate::{hlt_loop, print, println, serial_print, serial_println};
 use crate::qemu::*;
 
 pub trait Testable {
@@ -27,7 +27,7 @@ pub fn test_panic_handler(info: &PanicInfo) -> ! {
     serial_println!("[failed]\n");
     serial_println!("Error: {}\n", info);
     exit_qemu(QemuExitCode::Failed);
-    loop {}
+    hlt_loop();
 }
 
 #[test_case]
