@@ -29,3 +29,6 @@ Links
 - https://www.geeksforgeeks.org/paging-in-operating-system/
 - https://www.guru99.com/paging-in-operating-system.html
 - https://eng.libretexts.org/Courses/Delta_College/Operating_System%3A_The_Basics/08%3A_Virtual_Memory/8.1%3A_Memory_Paging
+- https://developer.arm.com/documentation/101811/0102/The-Memory-Management-Unit--MMU-
+- https://wiki.osdev.org/Paging
+- https://stackoverflow.com/questions/67033820/what-is-paging-exactly-osdev
