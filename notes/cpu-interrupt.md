@@ -64,6 +64,8 @@ The GDT is a structure that contains the segments of the program. It was used on
 
 While segmentation is no longer supported in 64-bit mode, the GDT still exists. It is mostly used for two things: Switching between kernel space and user space, and loading a TSS structure.
 
+https://wiki.osdev.org/GDT_Tutorial
+
 #### Timer interrupts
 Timer interrupts are essential for an operating system because they provide a way to periodically interrupt the running process and let the kernel regain control. The kernel can then switch to a different process and create the illusion of multiple processes running in parallel.
 
@@ -76,3 +78,5 @@ Programmable Interrupt controller aggregates the interrupts from all devices and
 ![PIC communication with the CPU](images/pic-communication.png)
 
 E.g when you press a key, the keyboard controller sends an interrupt to the PIC, which forwards it to the CPU. The CPU looks for a handler function in the IDT.
+
+https://wiki.osdev.org/8259_PIC
