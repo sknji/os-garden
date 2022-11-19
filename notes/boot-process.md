@@ -1,7 +1,7 @@
 The Boot Process
 - When you turn on a computer;
   - it begins executing firmware(BIOS/UEFI) code that is stored in motherboard ROM. This firmware performs a power-on self-test, detects available RAM, and pre-initializes the CPU and hardware routines.
-  - Afterwards, it looks for a bootable disk and starts booting the operating system kernel. Control is transferred to the bootloader which is a 512-byte portion of executable code stored at the disk beginning. Most bootloaders are larger than 512 bytes, so bootloaders are commonly split into a small first stage, which fits into 512 bytes, and a second stage, which is subsequently loaded by the first stage.
+  - Afterwards, it looks for a bootable disk and starts booting the operating system kernel. Control is transferred to the bootloader which is a 512-byte portion of executable code stored at the disk beginning. hat location is the first sector of the disk (cylinder 0, head 0, sector 0) and it takes 512 bytes. To make sure that the "disk is bootable", the BIOS checks that bytes 511 and 512 of the alleged boot sector are bytes 0xAA55  (beware of endianness, x86 is little-endian). Most bootloaders are larger than 512 bytes, so bootloaders are commonly split into a small first stage, which fits into 512 bytes, and a second stage, which is subsequently loaded by the first stage.
 
 
 On x86, there are two firmware standards: the “Basic Input/Output System“ (BIOS) and the newer “Unified Extensible Firmware Interface” (UEFI). The BIOS standard is old and outdated, but simple and well-supported on any x86 machine since the 1980s. UEFI, in contrast, is more modern and has much more features

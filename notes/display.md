@@ -12,7 +12,6 @@ Bit(s)	Value
 12-14	  Background color
 15	    Blink
 
-
 The first byte represents the character that should be printed in the ASCII encoding.
 
 The second byte defines how the character is displayed. The first four bits define the foreground color, the next three bits the background color, and the last bit whether the character should blink.
